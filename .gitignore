@@ -1,3 +1,6 @@
 logs/
 .vscode
 target/
+.classpath
+.project
+.settings/
