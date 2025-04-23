@@ -4,6 +4,7 @@ package com.example.taskmanager.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 @Entity
 @Data
 @NoArgsConstructor
