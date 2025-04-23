@@ -1,6 +1,7 @@
 package com.example.taskmanager.controller;
 
 import com.example.taskmanager.model.Task;
+import com.example.taskmanager.repository.TaskRepository;
 import com.example.taskmanager.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ public class TaskController {
     public List<Task> getAllTasks() {
         return service.getAllTasks();
     }
+
     @PostMapping
     public Task createTask(@RequestBody Task task) {
         return service.createTask(task);
@@ -31,8 +33,10 @@ public class TaskController {
         return service.updateTask(id, task);
     }
 
+//    @CacheEvict(value = "task", key = "#id")
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable Long id) {
+        
         service.deleteTask(id);
     }
 }
