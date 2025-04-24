@@ -1,18 +1,18 @@
 package com.example.taskmanager.controller;
 
+import com.example.taskmanager.dto.InspirationDTO;
 import com.example.taskmanager.model.Inspiration;
 import com.example.taskmanager.repository.InspirationRepository;
-import com.example.taskmanager.dto.InspirationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/inspiration")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://192.168.1.5:3000"})
 
 public class InspirationController {
     
@@ -37,15 +37,12 @@ public class InspirationController {
     }
 */
     @GetMapping("/user/{userId}")
-    public List<InspirationDTO> getByUser(
+    public Page<InspirationDTO> getByUser(
             @PathVariable("userId") Long userId,
             Pageable pageable
     ) {
         return inspirationRepo.findByUserId(userId, pageable)
-                .getContent()
-                .stream()
-                .map(InspirationDTO::new)
-                .collect(Collectors.toList());
+                .map(InspirationDTO::new);
     }
 
 }
